@@ -21,11 +21,11 @@ nrow(penguins.filltered)
 ncol(penguins.filltered)
 ggplot(penguins.filltered,aes(x = bill_length_mm, y=flipper_length_mm, color=species))+geom_point()
 #b = ggplot(penguins,aes(x = x, y=y, color=penguins$species))+geom_point()
-ggsave("plot.png")
+ggsave("p8105_hw1_jz3570_plot.png")
 
 ```
 
-##### In the data "palmerpenguins", there are 8 variables (columns) and 344 observations (rows). The eight variables are island, species, bill length (mm), bill width (mm), flipper length (mm), bosy mass (g), age, and sex. There is one row of NA data. After eliminating that NA row, we have 343 rows in the dataframe, called "penguins.filltered".
+##### In the data "palmerpenguins", there are 8 variables (columns) and 344 observations (rows). The eight variables are island, species, bill length (mm), bill width (mm), flipper length (mm), bosy mass (g), age, and sex. There is one row of NA data. After eliminating that NA row, we have 343 rows in the dataframe, called "penguins.filltered". The mean of flipper length is 200.967 mm.
 
 ### Problem 2
 
@@ -43,6 +43,15 @@ dataframe =
     factors = fact
   )
 
+## Try first way
+
+mean(dataframe %>% pull(sample_norm))
+mean(dataframe %>% pull(boolean))
+mean(dataframe %>% pull(characters))
+mean(as.numeric(dataframe %>% pull(factors)))
+
+## Try second way
+
 mean(dataframe$sample_norm)
 mean(dataframe$boolean)
 mean(dataframe$characters)
@@ -55,6 +64,6 @@ as.numeric(dataframe$factors)
 ```
 
 
-##### The first two variables, sample and logic vector, worked, but the charactor and factor vectors did work and gave NA result. By using as.numeric function, the first variable, sample, gives the same numbers as we generated before. For the second variable, in the logic vector, "True"s are replaced with 1 and "False"s are replaced with 0. The charactors still give NAs as the output. However, the factor vectors are now converted to numbers. That explains the first part, where the first two vectors are read as numbers by R, and characters cannot be converted to numbers. Without manully convert factors to numbers, R will not process factors as numbers, but we can manully make the factors as numebrs.
+##### The first two variables, sample and logic vector, worked, but the charactor and factor vectors did not work and gave NA result. By using as.numeric function, the first variable, sample, gives the same numbers as we generated before. Spesifically, for the second variable, in the logic vector, "True"s are replaced with 1 and "False"s are replaced with 0. The charactors still give NAs as the output. However, the factor vectors are now converted to numbers. Spesifically, the three levels of this factor variables are converted to numbers, 1, 2, 3. That explains the previous part, where the first two vectors are read as numbers by R, and characters cannot be converted to numbers. Without manully convert factors to numbers, R will not process factors as numbers, but we can manully make the factors as numebrs.
 
 
