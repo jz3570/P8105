@@ -1,0 +1,60 @@
+---
+title: "HW 1"
+author: "Jiawen Zhao"
+output: github_document
+---
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r palmerpenguins, warning=FALSE, message=FALSE}
+# install.packages("palmerpenguins")
+library("ggplot2")
+data("penguins", package = "palmerpenguins")
+nrow(penguins)
+ncol(penguins)
+penguins.filltered <- na.omit(penguins)
+mean(penguins.filltered$flipper_length_mm)
+nrow(penguins.filltered)
+ncol(penguins.filltered)
+ggplot(penguins.filltered,aes(x = bill_length_mm, y=flipper_length_mm, color=species))+geom_point()
+#b = ggplot(penguins,aes(x = x, y=y, color=penguins$species))+geom_point()
+ggsave("plot.png")
+
+```
+
+##### In the data "palmerpenguins", there are 8 variables (columns) and 344 observations (rows). The eight variables are island, species, bill length (mm), bill width (mm), flipper length (mm), bosy mass (g), age, and sex. There is one row of NA data. After eliminating that NA row, we have 343 rows in the dataframe, called "penguins.filltered".
+
+### Problem 2
+
+```{r problem 2, warning=FALSE, message=FALSE}
+library("tidyverse")
+sample = rnorm(10)
+cha = c("apple", "banana", "cherry", "grape", "peach", "apple", "banana", "cherry", "grape", "peach")
+fact = factor(c("low", "median", "high", "low", "median", "high", "low", "median", "high", "low"))
+
+dataframe = 
+  tibble(
+    sample_norm = sample,
+    boolean = sample>0,
+    characters = cha,
+    factors = fact
+  )
+
+mean(dataframe$sample_norm)
+mean(dataframe$boolean)
+mean(dataframe$characters)
+mean(dataframe$factors)
+
+as.numeric(dataframe$sample_norm)
+as.numeric(dataframe$boolean)
+as.numeric(dataframe$characters)
+as.numeric(dataframe$factors)
+```
+
+
+##### The first two variables, sample and logic vector, worked, but the charactor and factor vectors did work and gave NA result. By using as.numeric function, the first variable, sample, gives the same numbers as we generated before. For the second variable, in the logic vector, "True"s are replaced with 1 and "False"s are replaced with 0. The charactors still give NAs as the output. However, the factor vectors are now converted to numbers. That explains the first part, where the first two vectors are read as numbers by R, and characters cannot be converted to numbers. Without manully convert factors to numbers, R will not process factors as numbers, but we can manully make the factors as numebrs.
+
+
